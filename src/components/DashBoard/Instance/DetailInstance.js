@@ -68,14 +68,14 @@ class DetailInstance extends Component {
                     <div className="card-body text-info">
                       <h5 className="card-title">SERVER : {instance.server}</h5>
                       <p className="card-text">PORT     : {instance.port} </p>
-                      <p className="card-text">USER     : {instance.user}
+                      <p className="card-text">USER     : <strong>{instance.user} </strong>
                         <button type="button" className="btn btn-outline-info btn-sm waves-effect waves-light align-button"
-                          onClick={() => this._onChangeUser(instance._id)} >Change
+                          onClick={() => this._onChangeUser(instance._id)} >Rotate
                                     </button>
                       </p>
-                      <p className="card-text">PASSWORD : {instance.pwd}
+                      <p className="card-text">PASSWORD : <strong>{instance.pwd}</strong>
                         <button type="button" className="btn btn-outline-info btn-sm waves-effect waves-light align-button"
-                          onClick={() => this._onChangePassword(instance._id)} >Change
+                          onClick={() => this._onChangePassword(instance._id)} >Rotate
                                     </button>
                       </p>
                       <p className="card-text">STATUS   : {instance.status === 1 ?

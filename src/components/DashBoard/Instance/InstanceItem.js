@@ -25,7 +25,7 @@ class InstanceItem extends Component {
     const { instance, index } = this.props;
     return (
       <Fragment>
-        <tr onClick={this._onDetailInstance}   >
+        <tr onClick={this._onDetailInstance}  style={{cursor: 'pointer'}} >
           <td>{index + 1}</td>
           <td>{instance.server}</td>
           <td>{instance.status === 1 ?

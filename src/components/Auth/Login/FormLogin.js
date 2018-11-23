@@ -51,7 +51,7 @@ class FormLogin extends Component {
                      name='txtUsername'
                      value={txtUsername}
                      onChange={this._onChange}
-                     placeholder="khanhney" />
+                     placeholder="khanhney hoặc khanhney.dev@gmail.com" />
                </div>
                <div className="form-group"><label htmlFor="userpassword">Mật Khẩu</label>
                   <input

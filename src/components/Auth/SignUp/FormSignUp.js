@@ -34,7 +34,7 @@ class FormSignUp extends Component {
 		const checkEmail = checkValidateMail(txtEmail);
 		console.log(checkEmail);
 		if (checkEmail && (txtUsername.length >= 6) && (txtPassword.length >= 6) && txtFullname) {
-			this.props.register(txtEmail, txtUsername, txtPassword, txtFullname);
+			this.props.register(txtUsername, txtPassword, txtEmail, txtFullname);
 		} else if (!checkEmail) {
 			showToast('warning', 'Email không tồn tại!');
 		}
