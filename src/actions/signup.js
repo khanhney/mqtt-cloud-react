@@ -7,17 +7,18 @@ export const signUpRequest = (user, history) => {
     return async dispatch => {
         try {
             const res = await apiCall('/user/register', 'POST', user)
+            // console.log(res.data)
+
             if (!res.data.error) {
-                console.log(res.data)
                 dispatch(signUpSuccess(res.data));
-                history.push('/login');
+                // history.location.state = { username: user.username };
+                history.push('/login', { username: user.username });
             } else {
-                console.log(res.data)
-                dispatch(signUpFaild(res.data.error));
+                dispatch(signUpFaild());
             }
 
         } catch (err) {
-            dispatch(signUpFaild({ error: 'Sign Up Faild!' }))
+            dispatch(signUpFaild())
         }
     }
 }
@@ -30,7 +31,7 @@ export const signUpSuccess = user => {
     }
 }
 
-export const signUpFaild = error => {
+export const signUpFaild = () => {
     return {
         type: SIGN_UP_AUTH_TYPES.SIGN_UP_FAILURE,
         message: 'Tại khoản đã tồn tại!'

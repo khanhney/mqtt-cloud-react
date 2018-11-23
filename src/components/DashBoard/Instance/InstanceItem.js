@@ -12,7 +12,7 @@ class InstanceItem extends Component {
   _onDetailInstance = (e) => {
     const target = e.target;
     if (target.type !== 'button') {
-      console.log(target);
+      // console.log(target);
       this.props.history.push(`/instance/${this.props.instance._id}`);
     }
   }

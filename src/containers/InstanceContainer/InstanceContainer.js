@@ -42,9 +42,9 @@ class InstanceContainer extends Component {
 
     _showInstanceItem = instances => {
         var result = null;
-        
+
         let arrTemp = [...instances];
-        
+
         // change status
         if (this.state.status !== '' && this.state.id !== '') {
             // eslint-disable-next-line
@@ -69,24 +69,27 @@ class InstanceContainer extends Component {
         return result;
     }
 
-    // _showDetailInstance = _id => {
-    //     this.props.getInstanceByIDRequest(_id, this.props.history);
-    // }
-
     _showNewInstance = instance => {
         return <NewInstance instance={instance} createInstance={this._createInstance} />
     }
 
     _createInstance = () => {
+        // if(instances.length > 5){
+        //     showToast('warning', 'Tối đa chỉ tạo được 5 instance');
+        // }else{
+        //     this.props.fetchNewInstanceRequest();
+        //     this.props.fetchInstancesRequest();
+        // }
+
         this.props.fetchNewInstanceRequest();
-        this.props.fetchInstancesRequest();
+        // this.props.fetchInstancesRequest();
     }
 
     render() {
         const { instances, newInstance } = this.props;
         return (
             <Fragment>
-                <Instances allInstance={this._showInstanceItem(instances)} newInstance={this._showNewInstance(newInstance)} />
+                <Instances lengthInstances={instances.length} allInstance={this._showInstanceItem(instances)} newInstance={this._showNewInstance(newInstance)} />
             </Fragment>
         );
     }

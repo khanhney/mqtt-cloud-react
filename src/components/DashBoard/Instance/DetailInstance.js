@@ -51,7 +51,7 @@ class DetailInstance extends Component {
     let status = instance.status;
     //   let user = instance.user;
     //   let pwd = instance.pwd;
-    console.log(this.props)
+    // console.log(this.props)
 
     return (
       <Fragment>

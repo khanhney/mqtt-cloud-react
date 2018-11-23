@@ -1,17 +1,23 @@
 import { INSTANCE } from '../constants/action-type';
 import { apiCall } from '../utils/api-call';
 
+
+/**
+ * get instances
+ */
 export const fetchInstancesRequest = () => {
 	return async dispatch => {
 		try {
 			// const token = 'Bearer '.concat(localStorage.getItem('token'));
 			const token = localStorage.getItem('token');
 			let fetchInstances = await apiCall('/instaces', 'GET', null, { token });
-			// console.log(fetchInstances.data);
 			if (!fetchInstances.data.error) {
 				// console.log(fetchInstances.data.data);
 				dispatch(fetchIntancesSuccess(fetchInstances.data.data));
-			} else dispatch(fetchInstanceFailure('cannot get data from headers!'));
+			} else {
+				// console.log(fetchInstances.data);
+				dispatch(fetchInstanceFailure('cannot get data from headers!'));
+			}
 
 		} catch (error) {
 			dispatch(fetchInstanceFailure('cannot get data from headers!'));
@@ -34,15 +40,23 @@ export const fetchInstanceFailure = message => {
 	}
 }
 
+/**
+ * create new Intance
+ */
+
 export const fetchNewInstanceRequest = () => {
 	return async dispatch => {
 		try {
 			const token = localStorage.getItem('token');
 			let fetchInstances = await apiCall('/instaces', 'POST', null, { token });
-			// console.log(fetchInstances.data);
+
 			if (!fetchInstances.data.error) {
 				dispatch(fetchNewInstance(fetchInstances.data.data));
-			} else dispatch(fetchNewInstanceFailure());
+				dispatch(fetchInstancesRequest());
+			} else {
+				// console.log('fetchNewInstanceFailure')
+				dispatch(fetchNewInstanceFailure());
+			}
 
 		} catch (error) {
 			dispatch(fetchNewInstanceFailure());
@@ -53,17 +67,21 @@ export const fetchNewInstanceRequest = () => {
 export const fetchNewInstance = newInstance => {
 	return {
 		type: INSTANCE.FETCH_NEW_INSTANCE_SUCCESS,
-		payload: newInstance
+		payload: newInstance,
+		message: 'Thêm instance thành công!'
 	}
 }
 
 export const fetchNewInstanceFailure = () => {
 	return {
 		type: INSTANCE.FETCH_NEW_INSTANCE_FAILURE,
-		message: 'cannot get new instance!'
+		message: 'Số lượng instance của bạn đã tạo tối đa!'
 	}
 }
 
+/**
+ * get instance by id
+ */
 export const getInstanceByIDRequest = _id => {
 	return async dispatch => {
 		try {
@@ -86,6 +104,9 @@ export const getInstanceByID = instance => {
 	}
 }
 
+/**
+ * change status
+ */
 export const changeStatusRequest = (idInstance, status) => {
 	return async dispatch => {
 		try {
@@ -96,7 +117,7 @@ export const changeStatusRequest = (idInstance, status) => {
 				dispatch(changeStatus(res.data.data))
 			}
 		} catch (error) {
-			console.log({error});
+			console.log({ error });
 		}
 	}
 }
@@ -104,10 +125,14 @@ export const changeStatusRequest = (idInstance, status) => {
 export const changeStatus = instance => {
 	return {
 		type: INSTANCE.CHANGE_STATUS,
-		payload: instance
+		payload: instance,
+		message: 'Thay đổi trạng thái thành công!'
 	}
 }
 
+/**
+ * change user
+ */
 export const changeUserRequest = (idInstance) => {
 	return async dispatch => {
 		try {
@@ -117,7 +142,7 @@ export const changeUserRequest = (idInstance) => {
 				dispatch(changeUser(res.data.data))
 			}
 		} catch (error) {
-			console.log({error});
+			console.log({ error });
 		}
 	}
 }
@@ -125,10 +150,14 @@ export const changeUserRequest = (idInstance) => {
 export const changeUser = instance => {
 	return {
 		type: INSTANCE.CHANGE_USER,
-		payload: instance
+		payload: instance,
+		message: 'Thay đổi người dùng thành công!'
 	}
 }
 
+/**
+ * change password
+ */
 export const changePasswordRequest = (idInstance) => {
 	return async dispatch => {
 		try {
@@ -139,7 +168,7 @@ export const changePasswordRequest = (idInstance) => {
 				dispatch(changePassword(res.data.data))
 			}
 		} catch (error) {
-			console.log({error});
+			console.log({ error });
 		}
 	}
 }
@@ -147,6 +176,7 @@ export const changePasswordRequest = (idInstance) => {
 export const changePassword = instance => {
 	return {
 		type: INSTANCE.CHANGE_PASSWORD,
-		payload: instance
+		payload: instance,
+		message: 'Thay đổi mặt khẩu thành công!'
 	}
 }
