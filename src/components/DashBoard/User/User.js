@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-moment.locale('vi')
+
+moment.locale('vi');
 
 const propTypes = {
     user: PropTypes.object.isRequired,

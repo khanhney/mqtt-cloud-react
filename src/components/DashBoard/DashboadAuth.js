@@ -14,7 +14,7 @@ class DashboardAuth extends Component {
             <Route key={index} path={item.path} exact={item.exact} component={item.main} />)
       }
 
-      return <Suspense fallback={<div>loading...</div>} ><Switch>{result}</Switch></Suspense>
+      return <Suspense fallback={<div>Loading...</div>} ><Switch>{result}</Switch></Suspense>
    }
 
    render() {

@@ -8,31 +8,62 @@ import NewInstance from '../../components/DashBoard/Instance/NewInstance';
 
 
 const propTypes = {
-    newInstance            : PropTypes.object.isRequired,
-    instances              : PropTypes.array.isRequired,
-    fetchInstancesRequest  : PropTypes.func.isRequired,
+    newInstance: PropTypes.object.isRequired,
+    instances: PropTypes.array.isRequired,
+    fetchInstancesRequest: PropTypes.func.isRequired,
     fetchNewInstanceRequest: PropTypes.func.isRequired
 };
 
-
 class InstanceContainer extends Component {
+    state = {
+        id: '',
+        status: ''
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.instance.status !== 'undefined' && nextProps.instance.status !== undefined) {
+            return {
+                id: nextProps.instance._id,
+                status: nextProps.instance.status
+            }
+        }
+
+        return null;
+    }
 
     componentDidMount() {
         this.props.fetchInstancesRequest();
         // this.props.fetchNewInstanceRequest();
     }
 
+    _changeStatus = (id, status) => {
+        this.props.changeStatus(id, status);
+    }
+
     _showInstanceItem = instances => {
         var result = null;
-        if (instances.length > 0) {
+        
+        let arrTemp = [...instances];
+        
+        // change status
+        if (this.state.status !== '' && this.state.id !== '') {
+            // eslint-disable-next-line
+            instances.filter((item, index) => {
+                if (item._id === this.state.id) {
+                    arrTemp[index].status = this.state.status;
+                }
+            })
+        }
+
+        if (arrTemp.length > 0) {
             // console.log(instances.length);
-            result = instances.map((item, index) => <InstanceItem
-                key              = {index}
-                index            = {index}
-                instance         = {item}
-                history          = {this.props.history}
-                changeStatus     = {this.props.changeStatus}
-                />)
+            result = arrTemp.map((item, index) => <InstanceItem
+                key={index}
+                index={index}
+                instance={item}
+                history={this.props.history}
+                changeStatus={(id, status) => this._changeStatus(id, status)}
+            />)
         }
 
         return result;
@@ -53,7 +84,6 @@ class InstanceContainer extends Component {
 
     render() {
         const { instances, newInstance } = this.props;
-        // console.log(instances)
         return (
             <Fragment>
                 <Instances allInstance={this._showInstanceItem(instances)} newInstance={this._showNewInstance(newInstance)} />
@@ -62,13 +92,12 @@ class InstanceContainer extends Component {
     }
 }
 
-
 InstanceContainer.propTypes = propTypes;
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        instances      : state.instances,
-        newInstance    : state.newInstance,
+        instances: state.instances,
+        newInstance: state.newInstance,
         getInstanceByID: state.detailInstance,
         instance: state.instance
     }

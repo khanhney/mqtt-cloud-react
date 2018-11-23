@@ -64,12 +64,11 @@ export const fetchNewInstanceFailure = () => {
 	}
 }
 
-export const getInstanceByIDRequest = (_id) => {
+export const getInstanceByIDRequest = _id => {
 	return async dispatch => {
 		try {
 			const token = localStorage.getItem('token');
 			let getInstance = await apiCall(`/instaces/${_id}`, 'GET', null, { token });
-
 			if (!getInstance.data.error) {
 				dispatch(getInstanceByID(getInstance.data.data));
 				// history.push(`/dashboard/instance/${_id}`, { instance: getInstance.data.data });

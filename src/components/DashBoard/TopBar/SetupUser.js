@@ -16,11 +16,17 @@ class SetupUser extends Component {
 				<li className="dropdown notification-list">
 					<div className="dropdown notification-list nav-pro-img">
 						{/* eslint-disable-next-line */}
-						<a className="dropdown-toggle nav-link arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false"><img src="assets/images/users/user-4.jpg" alt="user" className="rounded-circle" /></a>
+						<a className="dropdown-toggle nav-link arrow-none waves-effect nav-user"
+							data-toggle="dropdown"
+							href="#"
+							role="button"
+							aria-haspopup="false"
+							aria-expanded="false">
+							{/* <img src="assets/images/users/user-4.jpg" alt="user" className="rounded-circle" /> */}
+							<h6>Xin chào! {this.props.auth.payload.username}</h6>
+						</a>
 						<div className="dropdown-menu dropdown-menu-right profile-dropdown">
-							{/* eslint-disable-next-line */}
-							{/* item*/}<a className="dropdown-item" href="#"><i className="mdi mdi-account-circle m-r-5" /> Profile</a> <a className="dropdown-item" href="#"><i className="mdi mdi-wallet m-r-5" /> My Wallet</a> <a className="dropdown-item d-block" href="#"><span className="badge badge-success float-right">11</span><i className="mdi mdi-settings m-r-5" /> Settings</a> <a className="dropdown-item" href="#"><i className="mdi mdi-lock-open-outline m-r-5" /> Lock screen</a>
-							{/* eslint-disable-next-line */}
+							
 							<div className="dropdown-divider" />
 							<Link className="dropdown-item text-danger" to='/login' onClick={this._onLogout}>
 								<i className="mdi mdi-power text-danger" /> Logout</Link>
@@ -32,6 +38,12 @@ class SetupUser extends Component {
 	}
 }
 
+const mapStateToProps = (state, ownProps) => {
+	return {
+		auth: state.auth
+	}
+}
+
 const mapDispatchToProps = (dispatch, ownProps) => {
 	return {
 		logout: () => {
@@ -40,4 +52,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 	}
 }
 
-export default connect(null, mapDispatchToProps)(SetupUser);
+export default connect(mapStateToProps, mapDispatchToProps)(SetupUser);

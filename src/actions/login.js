@@ -13,7 +13,6 @@ export const loginRequest = (username, password, history) => {
                 dispatch(loginSuccess(res.data.data.infoUser));
                 // dispatch(loginAuth(localStorage.getItem()))
             } else {
-                console.log(res.data)
                 dispatch(loginFailure())
             }
         } catch (err) {
@@ -26,21 +25,23 @@ export const loginAuth = (token, user) => {
     return {
         type: LOGIN_AUTH_TYPES.LOGIN_SUCCESS,
         token: token,
-        payload: user
+        payload: user,
+        message: 'Đăng nhập thành công!'
     }
 }
 
 export const loginSuccess = user => {
     return {
         type: LOGIN_AUTH_TYPES.LOGIN_SUCCESS,
-        payload: user
+        payload: user,
+        message: 'Đăng nhập thành công!'
     }
 }
 
 export const loginFailure = () => {
     return {
         type: LOGIN_AUTH_TYPES.LOGIN_FAILURE,
-        payload: 'Username or password wrong!'
+        message: 'Username hoặc mật khẩu của bạn bị sai!'
     }
 }
 
@@ -68,6 +69,7 @@ export const clearToken = () => {
     localStorage.removeItem('user');
 
     return {
-        type: LOGIN_AUTH_TYPES.LOGOUT
+        type: LOGIN_AUTH_TYPES.LOGOUT,
+        message: 'Bạn đã đăng xuất thành công!'
     }
 }

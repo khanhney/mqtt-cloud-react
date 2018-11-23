@@ -10,29 +10,38 @@ const propTypes = {
 class InstanceItem extends Component {
 
   _onDetailInstance = (e) => {
-    console.log(e);
-    this.props.history.push(`/instance/${this.props.instance._id}`);
+    const target = e.target;
+    if (target.type !== 'button') {
+      console.log(target);
+      this.props.history.push(`/instance/${this.props.instance._id}`);
+    }
   }
 
   _onChangeStatus = (idInstance, status) => {
-    console.log('âs');
     this.props.changeStatus(idInstance, status);
- }
+  }
 
   render() {
     const { instance, index } = this.props;
     return (
       <Fragment>
-        <tr onClick={e => this._onDetailInstance(e)} itemID  >
+        <tr onClick={this._onDetailInstance}   >
           <td>{index + 1}</td>
           <td>{instance.server}</td>
-          <td>{instance.status === 1 ? <span className="badge badge-success">Đã hoạt động</span> : <span className="badge badge-dark">Không hoạt động</span>}</td>
+          <td>{instance.status === 1 ?
+            <span className="badge badge-success">Đã hoạt động</span>
+            : <span className="badge badge-dark">Không hoạt động</span>}</td>
           <td>{instance.port}</td>
           {/* <td>{instance._id}</td> */}
-          <td>{instance.user}</td>
-          <td>{instance.pwd}</td>
+          <td>{instance.user.length > 8 ? instance.user.substring(0, 8) + '***' : instance.user}</td>
+          <td>{instance.pwd.length > 8 ? instance.pwd.substring(0, 8) + '***' : instance.pwd}</td>
           <td>{instance.owner.username}</td>
-          <td id='buttonChange'><button type="button" className="btn btn-outline-danger" onClick={this._onChangeStatus(instance._id, instance.status)} >{instance.status === 1 ? 'Tắt' : 'Bật'}</button></td>
+          <td >
+            <button type="button" className={`btn btn-outline-${instance.status === 1 ? 'danger' : 'success'}`}
+              onClick={() => this._onChangeStatus(instance._id, instance.status)} >
+              {instance.status === 1 ? 'Tắt' : 'Bật'}
+            </button>
+          </td>
         </tr>
       </Fragment>
     );

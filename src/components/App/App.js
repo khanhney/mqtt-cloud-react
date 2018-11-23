@@ -4,7 +4,7 @@ import './App.css';
 import LoginContainer from '../../containers/LoginContainer/LoginContainer';
 import SignUpContainer from '../../containers/SignUpContainer/SignUpContainer';
 import DashboardAuth from '../DashBoard/DashboadAuth';
-import NotFoundPage from '../NotFoundPage/NotFoundPage';
+// import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import PrivateRoute from '../../routes/PrivateRoute';
 
 
@@ -25,7 +25,8 @@ class App extends Component {
             <Switch>
                   <Route path="/login" component={LoginContainer} />
                   <Route path='/sign-up' component={SignUpContainer} />
-                  <PrivateRoute path="/instance" component={DashboardAuth} />
+                  {/* <Redirect exact from='' to='/instance' /> */}
+                  <PrivateRoute path="/" component={DashboardAuth} />
                   {/* <Route component={NotFoundPage} /> */}
                </Switch>
          </Fragment>
