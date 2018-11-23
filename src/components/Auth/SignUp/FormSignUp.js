@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import { showToast } from '../../../utils/config-toastr';
-import { checkValidateMail } from '../../../utils/check-email';
 // import PropTypes from 'prop-types';
 
 
@@ -31,12 +30,14 @@ class FormSignUp extends Component {
 	_onSubmit = e => {
 		e.preventDefault();
 		const { txtEmail, txtUsername, txtPassword, txtFullname } = this.state;
-		const checkEmail = checkValidateMail(txtEmail);
-		console.log(checkEmail);
-		if (checkEmail && (txtUsername.length >= 6) && (txtPassword.length >= 6) && txtFullname) {
-			this.props.register(txtEmail, txtUsername, txtPassword, txtFullname);
-		} else if (!checkEmail) {
+		if (txtEmail && (txtUsername.length >= 6) && (txtPassword.length >= 6) && txtFullname) {
+			this.props.register(txtUsername, txtPassword, txtEmail, txtFullname);
+		} else if (!txtEmail) {
 			showToast('warning', 'Email không tồn tại!');
+		} else if (this.state.txtUsername.length < 6) {
+			showToast('warning', 'Username phải > 6 kí tự');
+		} else {
+			showToast('warning', 'Password phải > 6 kí tự');
 		}
 	}
 

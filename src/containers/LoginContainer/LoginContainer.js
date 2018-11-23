@@ -14,6 +14,7 @@ const propTypes = {
 class LoginContainer extends Component {
     state = {
         isAuth: false,
+        username: ''
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
@@ -22,26 +23,22 @@ class LoginContainer extends Component {
                 isAuth: nextProps.auth.authenticated
             }
         }
+        // console.log(nextProps)
+        if (nextProps.location.state !== undefined && nextProps.location.state.username !== prevState.username) {
+            return {
+                username: nextProps.location.state.username
+            }
+        }
 
         return null;
     }
-
-    // componentDidUpdate(prevProps, prevState) {
-    //     console.log(prevProps)
-    //     const { isAuth } = this.state;
-    //     if (isAuth) {
-    //         const { history } = this.props;
-    //         history.push('/');
-    //     }
-    // }
-
 
     _onLogin = (username, password) => {
         this.props.loginAuth(username, password, this.props.history);
     }
 
     _showForm = () => {
-        return <FormLogin login={(username, password) => this._onLogin(username, password)} />
+        return <FormLogin username={this.state.username} login={(username, password) => this._onLogin(username, password)} />
     }
 
     render() {

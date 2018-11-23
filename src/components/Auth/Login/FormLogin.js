@@ -14,6 +14,19 @@ class FormLogin extends Component {
       txtPassword: '',
    }
 
+   static getDerivedStateFromProps(nextProps, prevState) {
+      if (nextProps.username !== 'undefined'
+         && nextProps.username !== ''
+         && nextProps.username !== prevState.txtUsername) {
+         console.log(nextProps.username)
+         return {
+            txtUsername: nextProps.username
+         }
+      }
+
+      return null;
+   }
+
    _onChange = e => {
       const target = e.target;
       let name = target.name;
@@ -26,14 +39,14 @@ class FormLogin extends Component {
 
    _onSubmit = e => {
       e.preventDefault();
-      if (this.state.txtUsername.length >= 6 && this.state.txtPassword.length >= 6){
+      if (this.state.txtUsername.length >= 6 && this.state.txtPassword.length >= 6) {
          this.props.login(this.state.txtUsername, this.state.txtPassword);
-      }else if(this.state.txtUsername.length < 6){
-            showToast('warning', 'Username phải > 6 kí tự');
-      }else {
-            showToast('warning', 'Password phải > 6 kí tự');
+      } else if (this.state.txtUsername.length < 6) {
+         showToast('warning', 'Username phải > 6 kí tự');
+      } else {
+         showToast('warning', 'Password phải > 6 kí tự');
       }
-               
+
    }
 
    render() {

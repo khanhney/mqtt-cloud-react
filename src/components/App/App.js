@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import LoginContainer from '../../containers/LoginContainer/LoginContainer';
 import SignUpContainer from '../../containers/SignUpContainer/SignUpContainer';
