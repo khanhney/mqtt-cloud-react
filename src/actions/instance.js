@@ -138,7 +138,6 @@ export const changeUserRequest = (idInstance) => {
 		try {
 			const token = localStorage.getItem('token');
 			let res = await apiCall(`/instaces/update-user/${idInstance}`, 'GET', null, { token })
-			console.log(idInstance)
 			if (!res.data.error) {
 				dispatch(changeUser(res.data.data))
 			}

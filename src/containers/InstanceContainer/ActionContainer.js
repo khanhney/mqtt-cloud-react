@@ -31,7 +31,6 @@ class ActionContainer extends Component {
    }
 
    _changeUser = (id) => {
-      console.log(id);
       this.props.changeUser(id);
    }
 

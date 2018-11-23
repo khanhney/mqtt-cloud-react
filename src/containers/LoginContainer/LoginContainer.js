@@ -18,6 +18,7 @@ class LoginContainer extends Component {
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
+
         if (nextProps.auth.authenticated !== undefined && nextProps.auth.authenticated !== prevState.isAuth) {
             return {
                 isAuth: nextProps.auth.authenticated
@@ -41,13 +42,16 @@ class LoginContainer extends Component {
         return <FormLogin username={this.state.username} login={(username, password) => this._onLogin(username, password)} />
     }
 
-    render() {
-
+    componentDidUpdate(prevProps, prevState) {
         const { isAuth } = this.state;
         if (isAuth) {
             const { history } = this.props;
             history.push('/instance');
         }
+    }
+
+
+    render() {
 
         return (
             <Fragment>

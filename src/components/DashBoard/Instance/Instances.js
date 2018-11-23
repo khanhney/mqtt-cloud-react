@@ -14,12 +14,12 @@ class Instance extends Component {
             <div className="content">
                <div className="container-fluid">
                   <div className="container">
-                     <div class="row mt-100">
-                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                     <div className="row mt-100">
+                        <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                            <h2>All Instance</h2>
 
                         </div>
-                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 offset-md-6">
+                        <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3 offset-md-6">
                            <div className="alert alert-info ">
                               <strong>Số lượng:</strong> {this.props.lengthInstances}/5
                            </div>

@@ -15,10 +15,9 @@ class FormLogin extends Component {
    }
 
    static getDerivedStateFromProps(nextProps, prevState) {
-      if (nextProps.username !== 'undefined'
+      if (nextProps.username !== 'undefined' && nextProps.username !== undefined
          && nextProps.username !== ''
          && nextProps.username !== prevState.txtUsername) {
-         console.log(nextProps.username)
          return {
             txtUsername: nextProps.username
          }
