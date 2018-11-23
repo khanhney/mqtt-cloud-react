@@ -86,7 +86,7 @@ export const getInstanceByIDRequest = _id => {
 	return async dispatch => {
 		try {
 			const token = localStorage.getItem('token');
-			let getInstance = await apiCall(`/instaces/${_id}`, 'GET', null, { token });
+			let getInstance = await apiCall(`/instaces/instace-detail/${_id}`, 'GET', null, { token });
 			if (!getInstance.data.error) {
 				dispatch(getInstanceByID(getInstance.data.data));
 				// history.push(`/dashboard/instance/${_id}`, { instance: getInstance.data.data });
@@ -111,7 +111,7 @@ export const changeStatusRequest = (idInstance, status) => {
 	return async dispatch => {
 		try {
 			const token = localStorage.getItem('token');
-			let res = await apiCall(`/instaces/${idInstance}/${status === 1 ? 0 : 1}`, 'GET', null, { token })
+			let res = await apiCall(`/instaces/update-status/${idInstance}/${status === 1 ? 0 : 1}`, 'GET', null, { token })
 
 			if (!res.data.error) {
 				dispatch(changeStatus(res.data.data))
@@ -138,6 +138,7 @@ export const changeUserRequest = (idInstance) => {
 		try {
 			const token = localStorage.getItem('token');
 			let res = await apiCall(`/instaces/update-user/${idInstance}`, 'GET', null, { token })
+			console.log(idInstance)
 			if (!res.data.error) {
 				dispatch(changeUser(res.data.data))
 			}

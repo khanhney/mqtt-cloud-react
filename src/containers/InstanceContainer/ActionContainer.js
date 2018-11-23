@@ -6,10 +6,10 @@ import { connect } from 'react-redux';
 
 
 const propTypes = {
-    instance: PropTypes.object.isRequired,
-    changeStatus: PropTypes.func.isRequired,
-    changeUser: PropTypes.func.isRequired,
-    changePassword: PropTypes.func.isRequired,
+   instance: PropTypes.object.isRequired,
+   changeStatus: PropTypes.func.isRequired,
+   changeUser: PropTypes.func.isRequired,
+   changePassword: PropTypes.func.isRequired,
 };
 
 var count = 0;
@@ -17,71 +17,72 @@ var count = 0;
 
 class ActionContainer extends Component {
 
-    componentWillMount() {
-        const { match } = this.props;
-        if (match) {
-            const { params } = match;
-            this.props.getInstance(params.idInstace);
-        }
-    }
+   componentWillMount() {
+      const { match } = this.props;
+      if (match) {
+         const { params } = match;
+         this.props.getInstance(params.idInstace);
+      }
+   }
 
 
-    _changeStatus = (id, status) => {
-        this.props.changeStatus(id, status);
-    }
+   _changeStatus = (id, status) => {
+      this.props.changeStatus(id, status);
+   }
 
-    _changeUser = (id) => {
-        this.props.changeUser(id);
-    }
+   _changeUser = (id) => {
+      console.log(id);
+      this.props.changeUser(id);
+   }
 
-    _changePassword = (id) => {
-        this.props.changePassword(id);
-    }
+   _changePassword = (id) => {
+      this.props.changePassword(id);
+   }
 
-    render() {
-        const { instance } = this.props;
-        if(count === 0){
-            count ++;
-            return null;
-        }
+   render() {
+      const { instance } = this.props;
+      if (count === 0) {
+         count++;
+         return null;
+      }
 
-        return (
-            <Fragment>
-                <DetailInstance
-                    instance       = {instance}
-                    changeStatus   = {(idInstance, status) => this._changeStatus(idInstance, status)}
-                    changeUser     = {(idInstance) => this._changeUser(idInstance)}
-                    changePassword = {(idInstance) => this._changePassword(idInstance)}
-                ></DetailInstance>
-            </Fragment>
-        );
-    }
+      return (
+         <Fragment>
+            <DetailInstance
+               instance       = {instance}
+               changeStatus   = {(idInstance, status) => this._changeStatus(idInstance, status)}
+               changeUser     = {(idInstance) => this._changeUser(idInstance)}
+               changePassword = {(idInstance) => this._changePassword(idInstance)}
+            ></DetailInstance>
+         </Fragment>
+      );
+   }
 }
 
 
 ActionContainer.propTypes = propTypes;
 
 const mapStateToProps = (state, ownProps) => {
-    return {
-        instance: state.instance
-    }
+   return {
+      instance: state.instance
+   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        getInstance: idInstance => {
-            dispatch(getInstanceByIDRequest(idInstance))
-        },
-        changeStatus: (idInstance, status) => {
-            dispatch(changeStatusRequest(idInstance, status))
-        },
-        changeUser: idInstance => {
-            dispatch(changeUserRequest(idInstance))
-        },
-        changePassword: idInstance => {
-            dispatch(changePasswordRequest(idInstance))
-        }
-    }
+   return {
+      getInstance: idInstance => {
+         dispatch(getInstanceByIDRequest(idInstance))
+      },
+      changeStatus: (idInstance, status) => {
+         dispatch(changeStatusRequest(idInstance, status))
+      },
+      changeUser: idInstance => {
+         dispatch(changeUserRequest(idInstance))
+      },
+      changePassword: idInstance => {
+         dispatch(changePasswordRequest(idInstance))
+      }
+   }
 }
 
 

@@ -33,7 +33,6 @@ class InstanceContainer extends Component {
 
     componentDidMount() {
         this.props.fetchInstancesRequest();
-        // this.props.fetchNewInstanceRequest();
     }
 
     _changeStatus = (id, status) => {
