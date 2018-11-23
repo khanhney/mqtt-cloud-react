@@ -6,8 +6,6 @@ import FormLogin from '../../components/Auth/Login/FormLogin';
 import HeadLogin from '../../components/Auth/Login/HeaderLogin';
 import FooterLogin from '../../components/Auth/Login/FooterLogin';
 
-
-
 const propTypes = {
     auth: PropTypes.object.isRequired,
     loginAuth: PropTypes.func.isRequired
@@ -39,7 +37,6 @@ class LoginContainer extends Component {
 
 
     _onLogin = (username, password) => {
-        // console.log({username, password}, this.props.history);
         this.props.loginAuth(username, password, this.props.history);
     }
 

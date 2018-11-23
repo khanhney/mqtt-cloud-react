@@ -1,10 +1,12 @@
 import { SIGN_UP_AUTH_TYPES } from '../constants/action-type';
+import { showToast } from '../utils/config-toastr';
 
 const initialState = {};
 
 const signUpReducer = (state = initialState, action) => {
     switch (action.type) {
         case SIGN_UP_AUTH_TYPES.SIGN_UP_SUCCESS:
+            // showToast('')
             return { ...state, user: action.payload };
         case SIGN_UP_AUTH_TYPES.SIGN_UP_FAILURE:
             return { ...state, user: action.error };

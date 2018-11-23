@@ -25,13 +25,14 @@ export const signUpRequest = (user, history) => {
 export const signUpSuccess = user => {
     return {
         type: SIGN_UP_AUTH_TYPES.SIGN_UP_SUCCESS,
-        payload: user
+        payload: user,
+        message: 'Bạn đã đăng kí thành công!'
     }
 }
 
 export const signUpFaild = error => {
     return {
         type: SIGN_UP_AUTH_TYPES.SIGN_UP_FAILURE,
-        error
+        message: 'Tại khoản đã tồn tại!'
     }
 }

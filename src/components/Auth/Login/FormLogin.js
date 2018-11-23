@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { showToast } from '../../../utils/config-toastr';
 // import PropTypes from 'prop-types';
 
 
@@ -25,8 +26,14 @@ class FormLogin extends Component {
 
    _onSubmit = e => {
       e.preventDefault();
-      if (this.state.txtUsername.length >= 6 && this.state.txtPassword.length >= 6)
+      if (this.state.txtUsername.length >= 6 && this.state.txtPassword.length >= 6){
          this.props.login(this.state.txtUsername, this.state.txtPassword);
+      }else if(this.state.txtUsername.length < 6){
+            showToast('warning', 'Username phải > 6 kí tự');
+      }else {
+            showToast('warning', 'Password phải > 6 kí tự');
+      }
+               
    }
 
    render() {

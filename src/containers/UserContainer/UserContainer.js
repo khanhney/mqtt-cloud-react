@@ -12,6 +12,7 @@ const propTypes = {
 class UserContainer extends Component {
     render() {
         const { payload } = this.props.auth;
+        console.log(payload);
         return (
             <Fragment>
                 <User user={payload}></User>

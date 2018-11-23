@@ -1,4 +1,6 @@
 import React, { Component, Fragment } from 'react';
+import { showToast } from '../../../utils/config-toastr';
+import { checkValidateMail } from '../../../utils/check-email';
 // import PropTypes from 'prop-types';
 
 
@@ -29,10 +31,12 @@ class FormSignUp extends Component {
 	_onSubmit = e => {
 		e.preventDefault();
 		const { txtEmail, txtUsername, txtPassword, txtFullname } = this.state;
-
-		if(txtEmail && (txtUsername.length >= 8) && (txtPassword.length >= 8) && txtFullname){
+		const checkEmail = checkValidateMail(txtEmail);
+		console.log(checkEmail);
+		if (checkEmail && (txtUsername.length >= 6) && (txtPassword.length >= 6) && txtFullname) {
 			this.props.register(txtEmail, txtUsername, txtPassword, txtFullname);
-			// console.log(this.props)
+		} else if (!checkEmail) {
+			showToast('warning', 'Email không tồn tại!');
 		}
 	}
 
@@ -86,7 +90,7 @@ class FormSignUp extends Component {
 							value={txtPassword}
 							onChange={this._onChange} />
 					</div>
-					
+
 					<div className="form-group row m-t-20">
 						<div className="col-12 text-right">
 							<button className="btn btn-primary w-md waves-effect waves-light" type="submit">Đăng Ký</button>
